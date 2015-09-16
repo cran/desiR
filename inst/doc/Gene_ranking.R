@@ -51,25 +51,25 @@ par(mfrow=c(3,2),
     las=1)
 hist(farmer2005$AveExpr, breaks=30, col="grey", border="white", main="",
      xlab="Mean expression")
-des.line(farmer2005$AveExpr, "d.high", cut1=5.75, cut2=7, scale=0.5)
+des.line(farmer2005$AveExpr, "d.high", des.args=c(cut1=5.75, cut2=7, scale=0.5))
 
 hist(farmer2005$SD, breaks=30, col="grey", border="white", main="",
      xlab="Within group SD")
-des.line(farmer2005$SD, "d.high", cut1=0.1, cut2=0.3, scale=0.5)
+des.line(farmer2005$SD, "d.high", des.args=c(cut1=0.1, cut2=0.3, scale=0.5))
 
 hist(farmer2005$P.Value, breaks=50, col="grey", border="white", main="",
      xlab="p-value")
-des.line(farmer2005$P.Value, "d.low", cut1=0.0001, cut2=0.1, scale=2)
+des.line(farmer2005$P.Value, "d.low", des.args=c(cut1=0.0001, cut2=0.1, scale=2))
 
 hist(farmer2005$logFC, breaks=50, col="grey", border="white", main="",
      xlab="Log FC")
-des.line(farmer2005$logFC, "d.ends", cut1=log2(1/3), cut2=log2(1/1.5),
-         cut3=log2(1.5), cut4=log2(3), scale=0.5)
+des.line(farmer2005$logFC, "d.ends", des.args=c(cut1=log2(1/3), cut2=log2(1/1.5),
+         cut3=log2(1.5), cut4=log2(3), scale=0.5))
 
 hist(abs(farmer2005$PCNA.cor), breaks=50, col="grey", border="white", main="",
      xlab="Absolute correlation with PCNA")
-des.line(farmer2005$P.Value, "d.low",  cut1=0.15, cut2=0.5,
-         scale=1.5, des.min = 0.05)
+des.line(farmer2005$P.Value, "d.low",  des.args=c(cut1=0.15, cut2=0.5,
+         scale=1.5, des.min = 0.05))
 
 ## ------------------------------------------------------------------------
 farmer2005$d1 <- d.high(farmer2005$AveExpr, cut1=5.75, cut2=7, scale=0.5)
