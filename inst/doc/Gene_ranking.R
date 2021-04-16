@@ -1,7 +1,7 @@
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 library(desiR)
 
-## ----fig.show='hold',  fig.height=4, fig.width=6-------------------------
+## ----fig.show='hold',  fig.height=4, fig.width=6------------------------------
 # generate values to convert to desirabilities
 x <- seq(0,1, length.out=500)
 
@@ -39,14 +39,14 @@ plot(d5 ~ x, ylab="Desirability", ylim=c(0,1), type="l",
 barplot(c(0.1, 0.5, 1), ylim=c(0,1.1),ylab="Desirability",
         main="Categorical", names.arg=c("A","B","C")); box()
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 # load the data (provided with the package)
 data(farmer2005)
 
 # look at first few rows
 head(farmer2005)
 
-## ---- fig.show='hold', fig.height=8, fig.width=5-------------------------
+## ---- fig.show='hold', fig.height=8, fig.width=5------------------------------
 par(mfrow=c(3,2),
     las=1)
 hist(farmer2005$AveExpr, breaks=30, col="grey", border="white", main="",
@@ -71,7 +71,7 @@ hist(abs(farmer2005$PCNA.cor), breaks=50, col="grey", border="white", main="",
 des.line(farmer2005$P.Value, "d.low",  des.args=c(cut1=0.15, cut2=0.5,
          scale=1.5, des.min = 0.05))
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 farmer2005$d1 <- d.high(farmer2005$AveExpr, cut1=5.75, cut2=7, scale=0.5)
 farmer2005$d2 <- d.high(farmer2005$SD, cut1=0.1, cut2=0.3, scale=0.5)
 farmer2005$d3 <- d.low(farmer2005$P.Value, cut1=0.0001, cut2=0.1, scale=2)
@@ -80,21 +80,21 @@ farmer2005$d4 <- d.ends(farmer2005$logFC, cut1=log2(1/3), cut2=log2(1/1.5),
 farmer2005$d5 <- d.low(abs(farmer2005$PCNA.cor), cut1=0.15, cut2=0.5,
             scale=1.5, des.min = 0.05)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 # order of weights needs to match the order of desirabilities
 farmer2005$D <- d.overall(farmer2005$d1, farmer2005$d2, farmer2005$d3,
                           farmer2005$d4, farmer2005$d5,
                 weights=c(0.1, 0.1, 1, 1, 0.5))
 
-## ----fig.height=4, fig.width=5-------------------------------------------
+## ----fig.height=4, fig.width=5------------------------------------------------
 par(las=1)
 plot(rev(sort(farmer2005$D)), type="l", xlab="Rank", ylab="Overall Desirability")
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 f2 <- farmer2005[order(farmer2005$D, decreasing=TRUE), ]
 head(f2, 10)
 
-## ---- fig.height=4, fig.width=4------------------------------------------
+## ---- fig.height=4, fig.width=4-----------------------------------------------
 # volcano plot
 par(las=1)
 plot(-log10(P.Value) ~ logFC, data=farmer2005, col="darkgrey", cex=0.75)
